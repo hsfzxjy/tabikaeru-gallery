@@ -1,0 +1,19 @@
+{
+  "name": "tabikaeru-gallery",
+  "version": "1.0.0",
+  "description": "A photo gallery for my frog.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsfzxjy/tabikaeru-gallery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsfzxjy/tabikaeru-gallery/issues"
+  },
+  "homepage": "https://github.com/hsfzxjy/tabikaeru-gallery#readme"
+}

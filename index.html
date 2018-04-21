@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Gallery</title>
+        <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="./bower_components/flickity/dist/flickity.pkgd.min.js"></script>
+        <script src="./bower_components/flickity-hash/hash.js"></script>
+        <link rel="stylesheet" href="./bower_components/flickity/dist/flickity.min.css">
+    </head>
+    <body>
+        <div class="carousel">
+
+        </div>
+        <a href="https://github.com/hsfzxjy/tabikaeru-gallery"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+        <script>
+            $(function () {
+                var $carousel = $('div.carousel')
+
+                $.ajax('./photos.list', {
+                    type: 'GET'
+                }).then(function (data) {
+                    $(data.split('\n')).each(function (index, item) {
+
+                        if (!item) return
+                        $([
+                            '<div class="carousel-cell" id="s' + item.replace('.', '') + '">',
+                                '<img class="carousel-cell-image" data-flickity-lazyload="./photos/',
+                                    item,
+                                '"/>',
+                            '</div>'].join(''))
+                            .prependTo($carousel)
+                    })
+                    $carousel.flickity({
+                        cellAlign: 'center',
+                        contain: true,
+                        lazyLoad: 3,
+                        wrapAround: true,
+                        adaptiveHeight: true,
+                        hash: true,
+                        pageDots: false,
+                        setGallerySize: false
+                    })
+                })
+            })
+        </script>
+        <style>
+            * { box-sizing: border-box; }
+
+            body { font-family: sans-serif; }
+
+            html, body {
+                background: #333;
+                height: 100%;
+                max-height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            .carousel {
+              /* background: #FAFAFA; */
+              max-height: 100%;
+              height: 100%;
+            }
+
+            .carousel-cell {
+              width: 66%;
+              /* height: 400px; */
+              max-height: 100%;
+              height: 100%;
+              margin-right: 10px;
+              background: #333;
+
+            }
+
+            .carousel-cell-image {
+              display: block;
+              max-height: 100%;
+              height: 100%;
+              margin: auto auto;
+              max-width: 100%;
+              opacity: 0;
+              -webkit-transition: opacity 0.4s;
+                      transition: opacity 0.4s;
+            }
+
+            /* fade in lazy loaded image */
+            .carousel-cell-image.flickity-lazyloaded,
+            .carousel-cell-image.flickity-lazyerror {
+              opacity: 1;
+            }
+        </style>
+    </body>
+</html>
